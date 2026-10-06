@@ -9,13 +9,6 @@ use Illuminate\View\View;
 
 class ExamController extends Controller
 {
-    public function index(): View
-    {
-        return view('exams.index', [
-            'exams' => Exam::published()->withCount('questions')->orderBy('title')->get(),
-        ]);
-    }
-
     public function show(Exam $exam): View
     {
         abort_unless($exam->is_published, 404);

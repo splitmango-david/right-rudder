@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<div class="wrap">
+<div @class(['wrap', 'wide' => $wide ?? false])>
   <header class="top">
     <a class="brand" href="{{ route('home') }}">
       <x-brand-plane />

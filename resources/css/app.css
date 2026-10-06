@@ -189,3 +189,4 @@ a.btn.primary{color:#1b1b2f}
 .review .filters a.on{background:var(--sun);color:#1b1b2f}
 .exam-list{display:grid;gap:18px}
 .exam-list .sheet h2{font-size:26px;margin:6px 0 8px}
+.section-title{justify-self:start;font-size:22px;background:var(--sheet);border:var(--b);border-radius:14px;padding:4px 14px;box-shadow:var(--sh-s);transform:rotate(-1deg)}

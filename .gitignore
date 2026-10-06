@@ -25,3 +25,7 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Raw mini-site uploads; may contain private details. Only the integrated, redacted versions are committed.
+/incoming/*
+!/incoming/.gitkeep
