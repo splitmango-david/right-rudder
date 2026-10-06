@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="exam-list">
+  <div class="home-cols">
     @if ($exams->isNotEmpty())
+      <div class="exam-list">
       <h2 class="section-title">Practice exams</h2>
       @foreach ($exams as $exam)
         <section class="sheet intro">
@@ -17,9 +18,11 @@
           </div>
         </section>
       @endforeach
+      </div>
     @endif
 
     @if ($guides)
+      <div class="exam-list">
       <h2 class="section-title">Study guides</h2>
       @foreach ($guides as $slug => $guide)
         <section class="sheet intro">
@@ -31,6 +34,7 @@
           </div>
         </section>
       @endforeach
+      </div>
     @endif
   </div>
 @endsection

@@ -3,7 +3,7 @@
  * under /guides; everything is scoped to .guide so it can't leak into exams.
  * Colour tokens, fonts, borders and shadows come from app.css.
  */
-.wrap.wide{max-width:1040px}
+.wrap.wide{max-width:1280px}
 
 .guide{
   /* Instrument-arc colours are semantic (they match real gauge markings), so they stay literal. */
