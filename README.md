@@ -27,6 +27,7 @@ composer setup
 3. Creates the SQLite database, runs migrations and seeds the exam.
 4. Links `public/storage` so the exam's chart images load.
 5. Installs JS dependencies and builds the assets.
+6. Turns on the git pre-commit hook in `.githooks/` (see [Built assets](#built-assets)).
 
 ### Open the site
 
@@ -44,6 +45,39 @@ composer setup
 | Format PHP | `vendor/bin/pint` |
 
 If a page errors with *"Unable to locate file in Vite manifest"*, run `npm run build`.
+
+## Built assets
+
+The compiled CSS/JS in `public/build/` **is committed to git**, so the server never needs Node.
+
+- The pre-commit hook runs `npm run build` and stages `public/build/` whenever a commit touches `resources/`, `vite.config.js` or `package.json`. You don't have to remember to build.
+- `npm run dev` does **not** update `public/build/`. The hook covers this at commit time.
+- To skip the hook once: `git commit --no-verify`. Only do this if the commit doesn't change front-end sources.
+- `public/hot` (created by `npm run dev`) stays git-ignored. Never commit it, or production will try to load assets from your machine.
+
+## Deploying (Laravel Forge)
+
+Deploy script:
+
+```sh
+cd $FORGE_SITE_PATH
+git pull origin $FORGE_SITE_BRANCH
+
+$FORGE_COMPOSER install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+$FORGE_PHP artisan migrate --force
+$FORGE_PHP artisan db:seed --force
+$FORGE_PHP artisan storage:link --force
+$FORGE_PHP artisan optimize
+
+( flock -w 10 9 || exit 1
+    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
+```
+
+- No `npm` step: assets come from git.
+- `db:seed` loads or updates the exam content on each deploy. Past attempts are kept.
+- `storage:link` makes the exam's chart images public.
+- The server needs PHP 8.3+.
 
 ## Adding content
 

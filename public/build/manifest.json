@@ -1,0 +1,38 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-B8MtNXa9.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/guide.css": {
+    "file": "assets/guide-CSZ6BWU2.css",
+    "name": "guide",
+    "names": [
+      "guide.css"
+    ],
+    "src": "resources/css/guide.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BvRk9kiK.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/exam.js": {
+    "file": "assets/exam-C1ZANRhY.js",
+    "name": "exam",
+    "src": "resources/js/exam.js",
+    "isEntry": true
+  },
+  "resources/js/guides/travel-air-d95a.js": {
+    "file": "assets/travel-air-d95a-DFPfbuP1.js",
+    "name": "travel-air-d95a",
+    "src": "resources/js/guides/travel-air-d95a.js",
+    "isEntry": true
+  }
+}

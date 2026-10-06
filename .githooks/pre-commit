@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# Rebuild front-end assets when a commit touches anything that feeds them,
+# so the committed public/build always matches the source. Production serves
+# public/build straight from git (no build step on the server).
+#
+# Skip once with: git commit --no-verify
+
+if ! git diff --cached --name-only | grep -qE '^(resources/|vite\.config\.js$|package(-lock)?\.json$)'; then
+    exit 0
+fi
+
+# GUI git clients often run hooks without the shell profile; use nvm and .nvmrc when available.
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+    . "$HOME/.nvm/nvm.sh" >/dev/null
+    nvm use >/dev/null 2>&1
+fi
+
+if ! command -v npm >/dev/null 2>&1; then
+    echo "pre-commit: npm not found; can't rebuild assets. Install Node (see .nvmrc) or commit with --no-verify." >&2
+    exit 1
+fi
+
+if [ -f public/hot ]; then
+    echo "pre-commit: note: 'npm run dev' is running; building production assets anyway." >&2
+fi
+
+echo "pre-commit: front-end sources changed, running npm run build..."
+if ! npm run build --silent >/dev/null; then
+    echo "pre-commit: npm run build failed; commit aborted. Run it manually to see the error." >&2
+    exit 1
+fi
+
+# -A stages deletions too, since each build replaces the hashed filenames.
+git add -A public/build
