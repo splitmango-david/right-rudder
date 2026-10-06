@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // An earlier version of this migration failed on MySQL after creating the table
+        // (the auto-generated index name exceeded 64 characters), leaving an empty,
+        // unrecorded table behind. Clear it so the migration can run cleanly.
+        Schema::dropIfExists('question_reference_material');
+
         Schema::create('question_reference_material', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->constrained()->cascadeOnDelete();
             $table->foreignId('reference_material_id')->constrained()->cascadeOnDelete();
             $table->unsignedSmallInteger('position')->default(0);
 
-            $table->unique(['question_id', 'reference_material_id']);
+            $table->unique(['question_id', 'reference_material_id'], 'question_reference_material_unique');
         });
     }
 
