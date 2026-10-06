@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ $title ?? config('app.name') }}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +19,9 @@
       <x-brand-plane />
       <h1>{{ $heading ?? config('app.name') }}</h1>
     </a>
-    <span class="meta" id="meta">{{ $meta ?? '' }}</span>
+    @if (! empty($meta))
+      <span class="meta" id="meta">{{ $meta }}</span>
+    @endif
   </header>
 
   <main id="app">

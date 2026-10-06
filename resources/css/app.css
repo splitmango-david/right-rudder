@@ -9,8 +9,10 @@
 
 html{height:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 
-/* Layout: cartoon sky — chunky ink outlines, hard offset shadows, sticker-style cards floating over drifting clouds */
+/* Layout: cartoon sky — chunky ink outlines, hard offset shadows, sticker-style cards floating over drifting clouds.
+   Always the daytime sky, regardless of the device's dark-mode setting. */
 :root{
+  color-scheme:light;
   --sky:#8fd3ff; --sky2:#c9ecff; --cloud:#ffffff;
   --sheet:#fffdf6; --ink:#1b1b2f; --muted:#55577a; --line:#1b1b2f;
   --nav:#2f6bff; --nav-soft:#dbe6ff;
@@ -23,17 +25,6 @@ html{height:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!importan
   --f-mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;
   --b:2.5px solid var(--line); --sh:4px 4px 0 var(--line); --sh-s:2px 2px 0 var(--line);
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --sky:#1a1f4d; --sky2:#2b2f6b; --cloud:#3a3f80;
-  --sheet:#24285a; --ink:#f4f1ff; --muted:#b9b8e0; --line:#0b0c22;
-  --nav:#7fa6ff; --nav-soft:#323a85; --sun:#ffd23f; --sun-soft:#4a4320;
-  --mag:#ff7ab4; --mag-soft:#4d2449; --ok:#4fe39a; --ok-soft:#1b4a3a; --bad:#ff7a66; --bad-soft:#552a2a; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --sky:#1a1f4d; --sky2:#2b2f6b; --cloud:#3a3f80;
-  --sheet:#24285a; --ink:#f4f1ff; --muted:#b9b8e0; --line:#0b0c22;
-  --nav:#7fa6ff; --nav-soft:#323a85; --sun:#ffd23f; --sun-soft:#4a4320;
-  --mag:#ff7ab4; --mag-soft:#4d2449; --ok:#4fe39a; --ok-soft:#1b4a3a; --bad:#ff7a66; --bad-soft:#552a2a; color-scheme:dark}
-
 *{box-sizing:border-box}
 body{background:var(--sky);color:var(--ink);font:500 16.5px/1.55 var(--f-body);padding-inline:16px;padding-block:0 130px;min-height:100%;
   background-image:
